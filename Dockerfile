@@ -1,8 +1,3 @@
-# this Dockerfile is so we can try CREST without having to install anything
-# we build upon a jupyter/scipy installation that was extended with z3
-# within this docker only fast things happen (install graphviz, copy files, do pip things)
-
-# take a Jupyter-docker with z3 already installed!
 FROM stklik/scipy-notebook-z3:1.0
 
 LABEL maintainer="Stefan Klikovits <crestdsl@klikovits.net>"
@@ -30,7 +25,7 @@ RUN jupyter nbextension enable codefolding/main
 RUN pip install --no-cache-dir --upgrade pip
 RUN pip install --no-cache-dir --upgrade crestdsl
 
-# copy the notebooks, so we have some inital stuff
+# copy a GettingStarted notebook
 COPY GettingStarted.ipynb ${HOME}/
 
 # some cleanup
