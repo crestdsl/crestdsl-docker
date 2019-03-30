@@ -1,0 +1,17 @@
+# Travis file to build a new image of the released crestdsl every day.
+# This way, we push the latest version to hub.docker.com at least once a day.
+# Also, we can figure out 
+sudo: required
+
+language: ruby
+
+services:
+  - docker
+
+before_install:
+  - docker build -t crestdsl/release:latest .
+
+script:
+  # extract the crestdsl-version
+  - crestdsl_version=`pip search crestdsl | awk -F'[()]' '{print $2}'`
+  - echo $crestdsl_version
