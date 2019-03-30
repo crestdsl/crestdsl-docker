@@ -12,5 +12,10 @@ script:
   - docker build -t crestdsl/release:latest .
   # extract the crestdsl-version
   - crestdsl_version=`pip search crestdsl | awk -F'[()]' '{print $2}'`
-  - docker tag crestdsl/release:latest crestdsl/release:$crestdsl_version
-  - docker images
+  - docker tag crestdsl/release:latest crestdsl/release:${crestdsl_version}
+  # login
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+  
+  # push images to docker hub
+  - docker push crestdsl/release:latest
+  - docker push crestdsl/release:${crestdsl_version}
