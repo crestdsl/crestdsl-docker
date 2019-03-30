@@ -8,10 +8,9 @@ language: ruby
 services:
   - docker
 
-before_install:
-  - docker build -t crestdsl/release:latest .
-
 script:
+  - docker build -t crestdsl/release:latest .
   # extract the crestdsl-version
   - crestdsl_version=`pip search crestdsl | awk -F'[()]' '{print $2}'`
-  - echo $crestdsl_version
+  - docker tag crestdsl/release:latest crestdsl/release:$crestdsl_version
+  - docker images
