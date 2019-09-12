@@ -22,10 +22,10 @@ RUN mkdir /var/lib/apt/lists/partial && \
     
 # update conda packages deliberately
 RUN conda update -n base conda
-RUN conda update numpy
-RUN conda update pandas
-RUN conda update matplotlib
-RUN conda update scipy
+RUN conda install numpy
+RUN conda install pandas
+RUN conda install matplotlib
+RUN conda install scipy
 RUN conda update networkx
 
 # install crestdsl
